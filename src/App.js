@@ -25,6 +25,8 @@ function App() {
       <footer className="footer text-center foot">
         <a
           href="https://www.linkedin.com/in/sai-kiran-shrinath-2048a0187/"
+          target="_blank"
+          rel="noreferrer noopener"
           style={{ color: "floralwhite", textDecoration: "none" }}
         >
           <strong>Designed & Developed by SK </strong>
