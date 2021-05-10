@@ -1,0 +1,15 @@
+{
+  "short_name": "SK's Food Recipes App",
+  "name": "Food Recipes App created by Sai Kiran Shrinath",
+  "icons": [
+    {
+      "src": "foodrecipeapplogo",
+      "sizes": "192x192",
+      "type": "image/jpg"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
