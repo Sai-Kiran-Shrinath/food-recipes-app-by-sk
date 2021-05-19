@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import ReactLoading from "react-loading";
 import { Card } from "react-bootstrap";
 
 function Home() {
   const APP_ID = "78653e8b";
   const APP_KEY = "06fac6281b44d264c8c99b80f05dea90";
 
-  const [fetchedData, setFetchedData] = useState([]);
+  const [fetchedData, setFetchedData] = useState(null);
   const [search, setSearch] = useState("chicken");
   const [query, setQuery] = useState("chicken");
   const [clicked, setClicked] = useState(false);
@@ -30,6 +31,7 @@ function Home() {
 
   const fetchIt = (e) => {
     e.preventDefault();
+    setFetchedData(null);
     setQuery(search);
     setClicked(false);
   };
@@ -115,36 +117,47 @@ function Home() {
       <br />
       <br />
       {recipeCard()}
-      <div className="row">
-        {fetchedData.map((recipe) => {
-          return (
-            <>
-              <div className="col-md-6">
-                <Card
-                  className=" card"
-                  style={{ marginBottom: "30px" }}
-                  key={recipe.recipe.label}
-                  onClick={() => cardCliked(recipe)}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={recipe.recipe.image}
-                    height="400px"
-                  />
-                  <div className="card-content">
-                    <h5 style={{ color: "gold" }}>{recipe.recipe.label}</h5>
-                    <ul>
-                      <li> Calories: {recipe.recipe.calories} Kcal</li>
-                      <li> Number of servings: {recipe.recipe.yield}</li>
-                      <li> Total weight: {recipe.recipe.totalWeight} g</li>
-                    </ul>
-                  </div>
-                </Card>
-              </div>
-            </>
-          );
-        })}
-      </div>
+      {fetchedData ? (
+        <div className="row">
+          {fetchedData.map((recipe) => {
+            return (
+              <>
+                <div className="col-md-6">
+                  <Card
+                    className=" card"
+                    style={{ marginBottom: "30px" }}
+                    key={recipe.recipe.label}
+                    onClick={() => cardCliked(recipe)}
+                  >
+                    <Card.Img
+                      variant="top"
+                      src={recipe.recipe.image}
+                      height="400px"
+                    />
+                    <div className="card-content">
+                      <h5 style={{ color: "gold" }}>{recipe.recipe.label}</h5>
+                      <ul>
+                        <li> Calories: {recipe.recipe.calories} Kcal</li>
+                        <li> Number of servings: {recipe.recipe.yield}</li>
+                        <li> Total weight: {recipe.recipe.totalWeight} g</li>
+                      </ul>
+                    </div>
+                  </Card>
+                </div>
+              </>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="card-content">
+          <ReactLoading
+            type="spinningBubbles"
+            color="orange"
+            height={500}
+            width={200}
+          />
+        </div>
+      )}
     </>
   );
 }
